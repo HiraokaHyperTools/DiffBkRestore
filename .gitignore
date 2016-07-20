@@ -194,3 +194,8 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+/DiffBkRestore/DiffBkRestore_*.exe
+/DiffBkRestore/Setup_DiffBkRestore_*.exe
+/DiffBkRestore/DiffBkRestore へのショートカット.lnk
+/DiffBkRestore/Tmpver.nsh

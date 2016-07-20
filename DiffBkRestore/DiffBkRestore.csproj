@@ -1,0 +1,178 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ACE2EA2E-D4A0-4B58-84FA-2C95A3A5EE7D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiffBkRestore</RootNamespace>
+    <AssemblyName>DiffBkRestore</AssemblyName>
+    <ApplicationIcon>1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AlphaFS, Version=1.5.0.0, Culture=neutral, PublicKeyToken=4b76c8c88cc75802, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExpForm.Designer.cs">
+      <DependentUpon>ExpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PolicyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PolicyForm.Designer.cs">
+      <DependentUpon>PolicyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RForm.Designer.cs">
+      <DependentUpon>RForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ExpForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PolicyForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PolicyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelSetForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelSetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerifyForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VerifyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WIP.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WIP.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SelSetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelSetForm.Designer.cs">
+      <DependentUpon>SelSetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerifyForm.Designer.cs">
+      <DependentUpon>VerifyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WIP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WIP.Designer.cs">
+      <DependentUpon>WIP.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FindHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExpirationHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FunctionHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1.ico" />
+    <None Include="App.config" />
+    <None Include="Resources\Book_openHS.png" />
+    <None Include="Resources\Book_angleHS.png" />
+    <Content Include="AlphaFS.dll" />
+    <Content Include="VFCopy.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DiffBkRestore.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\FINDFILE16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="VFCopy">
+      <Guid>{2BABD037-1C20-4369-BFEA-464C817ABCBD}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>2</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
