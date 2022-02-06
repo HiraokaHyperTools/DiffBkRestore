@@ -6,13 +6,17 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DiffBkRestore {
-    public partial class WIP : UserControl {
-        public WIP() {
+namespace DiffBkRestore
+{
+    public partial class WIP : UserControl
+    {
+        public WIP()
+        {
             InitializeComponent();
         }
 
-        public static WIP Show(Control parent) {
+        public static WIP Show(Control parent)
+        {
             WIP o = new WIP();
             o.Parent = parent;
             o.Location = Point.Empty;

@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace DiffBkRestore {
-    static class Program {
+namespace DiffBkRestore
+{
+    static class Program
+    {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
-        static void Main(String[] args) {
+        static void Main(String[] args)
+        {
             String fp = null;
-            foreach (String a in args) {
-                if (a.StartsWith("/") || a.StartsWith("--")) {
+            foreach (String a in args)
+            {
+                if (a.StartsWith("/") || a.StartsWith("--"))
+                {
                 }
-                else if (fp == null) {
+                else if (fp == null)
+                {
                     fp = a;
                 }
             }
