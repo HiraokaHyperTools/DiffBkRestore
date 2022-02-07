@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using System.Web;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
@@ -15,7 +14,12 @@ using System.Threading;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using fs = Alphaleonis.Win32.Filesystem;
+using Alphaleonis.Win32.Filesystem;
+using Stream = System.IO.Stream;
+using StreamReader = System.IO.StreamReader;
+using StringWriter = System.IO.StringWriter;
+using FileAttributes = System.IO.FileAttributes;
+using FileStream = System.IO.FileStream;
 
 namespace DiffBkRestore
 {
@@ -87,9 +91,9 @@ namespace DiffBkRestore
                             String fnCache = HttpUtility.UrlDecode(cols[2], Encoding.UTF8);
                             String fpCache = (curdir != null) ? Path.Combine(curdir, fnCache) : fnCache;
 
-                            DLeaf curl = Alloc(fs.Path.GetDirectoryName(fpCache));
+                            DLeaf curl = Alloc(Path.GetDirectoryName(fpCache));
 
-                            String fn = fs.Path.GetFileName(fnCache);
+                            String fn = Path.GetFileName(fnCache);
 
                             curl.dictFile[fn] = new FEntry(
                                 cols[1],
@@ -158,7 +162,7 @@ namespace DiffBkRestore
 
                 public bool Test(String fp)
                 {
-                    return rex.IsMatch(fs.Path.GetFileName(fp));
+                    return rex.IsMatch(Path.GetFileName(fp));
                 }
             }
 
@@ -173,7 +177,7 @@ namespace DiffBkRestore
 
                 public bool Test(String fp)
                 {
-                    String fn = fs.Path.GetFileName(fp);
+                    String fn = Path.GetFileName(fp);
                     int cnt = 0;
                     foreach (String kw in alkw)
                     {
@@ -289,7 +293,7 @@ namespace DiffBkRestore
                 }
                 else
                 {
-                    String dirIn = fs.Path.GetDirectoryName(fp);
+                    String dirIn = Path.GetDirectoryName(fp);
                     TryOpen(dirIn);
                 }
             }
@@ -511,7 +515,9 @@ namespace DiffBkRestore
                     {
                         Directory.CreateDirectory(dir);
                         if (curl.fe.atts != 0)
+                        {
                             File.SetAttributes(dir, (FileAttributes)curl.fe.atts);
+                        }
                     }
                     catch (Exception err)
                     {
@@ -561,7 +567,7 @@ namespace DiffBkRestore
 
                 try
                 {
-                    Directory.CreateDirectory(fs.Path.GetDirectoryName(fpTo));
+                    Directory.CreateDirectory(Path.GetDirectoryName(fpTo));
                     if (File.Exists(fpTo))
                     {
                         if (!IfOverwrite) return;
@@ -658,7 +664,10 @@ namespace DiffBkRestore
 
         private void RForm_Load(object sender, EventArgs e)
         {
-            this.Text = this.Text.Replace("(*)", new Version(Application.ProductVersion).ToString());
+            this.Text = this.Text.Replace(
+                "(*)",
+                $"{new Version(Application.ProductVersion)} {((IntPtr.Size == 4) ? "(x86)" : "(x64)")}"
+            );
 
             hsc.Panel2Collapsed = true;
 
@@ -672,14 +681,14 @@ namespace DiffBkRestore
         {
             if (File.Exists(dirYa))
             {
-                if (String.Compare(fs.Path.GetExtension(dirYa), ".DiffBkSet", true) == 0)
+                if (String.Compare(Path.GetExtension(dirYa), ".DiffBkSet", true) == 0)
                 {
-                    SelectSetAt(fs.Path.GetDirectoryName(dirYa));
+                    SelectSetAt(Path.GetDirectoryName(dirYa));
                     return true;
                 }
-                else if (String.Compare(fs.Path.GetExtension(dirYa), ".lst", true) == 0)
+                else if (String.Compare(Path.GetExtension(dirYa), ".lst", true) == 0)
                 {
-                    String cacheDir = Path.Combine(fs.Path.GetDirectoryName(dirYa), @"..\CACHE");
+                    String cacheDir = Path.Combine(Path.GetDirectoryName(dirYa), @"..\CACHE");
                     if (Directory.Exists(cacheDir))
                     {
                         OpenIt(cacheDir, dirYa);
@@ -1000,9 +1009,9 @@ namespace DiffBkRestore
             tvr_AfterSelect(tvr, new TreeViewEventArgs(tn));
         }
 
-        VFCopy.SrcClass GetLvSrc(ListView sender)
+        VFCopyAx.Src GetLvSrc(ListView sender)
         {
-            VFCopy.SrcClass dataSrc = new VFCopy.SrcClass();
+            VFCopyAx.Src dataSrc = new VFCopyAx.Src();
 
             using (AH ah = new AH())
                 foreach (ListViewItem lvi in sender.SelectedItems)
@@ -1011,7 +1020,7 @@ namespace DiffBkRestore
                     if (fe != null)
                     {
                         String fpFrm = CFPUt.GetCachefp(cacheDir, fe.hash);
-                        dataSrc.AddFile(fs.Path.GetFileName(fe.Name), new DateTime(fe.mt, DateTimeKind.Utc), fe.cb, new CopyOpenSt(fpFrm));
+                        dataSrc.AddFile(Path.GetFileName(fe.Name), new DateTime(fe.mt, DateTimeKind.Utc), fe.cb, new CopyOpenSt(fpFrm));
                     }
                     DLeaf curl = lvi.Tag as DLeaf;
                     if (curl != null)
@@ -1022,8 +1031,8 @@ namespace DiffBkRestore
             dataSrc.Make();
             dataSrc.SetAsyncMode(1);
 
-            dataSrc.OnStartOperation += delegate { ++cntAsyncOp; };
-            dataSrc.OnEndOperation += delegate { --cntAsyncOp; };
+            ((VFCopyAx.DSrcEvents_Event)dataSrc).OnStartOperation += delegate { ++cntAsyncOp; };
+            ((VFCopyAx.DSrcEvents_Event)dataSrc).OnEndOperation += delegate { --cntAsyncOp; };
             return dataSrc;
         }
 
@@ -1032,7 +1041,7 @@ namespace DiffBkRestore
             DoDragDrop(GetLvSrc(lvr), DragDropEffects.Copy);
         }
 
-        class CopySt : VFCopy.ISt
+        class CopySt : VFCopyAx.ISt
         {
             Stream si;
 
@@ -1060,7 +1069,7 @@ namespace DiffBkRestore
             #endregion
         }
 
-        class CopyOpenSt : VFCopy.IOpenSt
+        class CopyOpenSt : VFCopyAx.IOpenSt
         {
             String fpFrm;
 
@@ -1068,7 +1077,7 @@ namespace DiffBkRestore
 
             #region IOpenSt ÉÅÉìÉo
 
-            public VFCopy.ISt OpenSt()
+            public VFCopyAx.ISt OpenSt()
             {
                 FileStream fs = File.OpenRead(fpFrm);
                 return new CopySt(fs);
@@ -1077,9 +1086,9 @@ namespace DiffBkRestore
             #endregion
         }
 
-        VFCopy.SrcClass GetTvSrc(TreeNode tn)
+        VFCopyAx.Src GetTvSrc(TreeNode tn)
         {
-            VFCopy.SrcClass dataSrc = new VFCopy.SrcClass();
+            VFCopyAx.Src dataSrc = new VFCopyAx.Src();
             if (tn != null)
             {
                 DLeaf curl = tn.Tag as DLeaf;
@@ -1123,16 +1132,16 @@ namespace DiffBkRestore
             #endregion
         }
 
-        private void AddWalk(VFCopy.SrcClass dataSrc, DLeaf curl, String prefix)
+        private void AddWalk(VFCopyAx.Src dataSrc, DLeaf curl, String prefix)
         {
             foreach (FEntry fe in curl.dictFile.Values)
             {
                 String fpFrm = CFPUt.GetCachefp(cacheDir, fe.hash);
-                dataSrc.AddFile(Path.Combine(prefix, NUt.Clean(fs.Path.GetFileName(fe.Name))), new DateTime(fe.mt, DateTimeKind.Utc), fe.cb, new CopyOpenSt(fpFrm));
+                dataSrc.AddFile(Path.Combine(prefix, NUt.Clean(Path.GetFileName(fe.Name))), new DateTime(fe.mt, DateTimeKind.Utc), fe.cb, new CopyOpenSt(fpFrm));
             }
             foreach (KeyValuePair<string, DLeaf> kv in curl.dictDir)
             {
-                AddWalk(dataSrc, kv.Value, Path.Combine(prefix, NUt.Clean(fs.Path.GetFileName(kv.Key))));
+                AddWalk(dataSrc, kv.Value, Path.Combine(prefix, NUt.Clean(Path.GetFileName(kv.Key))));
             }
         }
 
@@ -1181,9 +1190,9 @@ namespace DiffBkRestore
             }
         }
 
-        VFCopy.SrcClass lastClipboard = null;
+        VFCopyAx.Src lastClipboard = null;
 
-        VFCopy.SrcClass LastClipboard
+        VFCopyAx.Src LastClipboard
         {
             get
             {
@@ -1301,7 +1310,7 @@ namespace DiffBkRestore
             Int64 cb = 0;
             foreach (KeyValuePair<String, FEntry> kv in root.dictFile)
             {
-                String fext = fs.Path.GetExtension(kv.Key).ToLowerInvariant();
+                String fext = Path.GetExtension(kv.Key).ToLowerInvariant();
                 Int64 v = 0;
                 dictext.TryGetValue(fext, out v);
                 v += kv.Value.cb;

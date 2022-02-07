@@ -32,16 +32,42 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AlphaFS, Version=1.5.0.0, Culture=neutral, PublicKeyToken=4b76c8c88cc75802, processorArchitecture=MSIL" />
+    <Reference Include="AlphaFS, Version=2.2.0.0, Culture=neutral, PublicKeyToken=4d31a58f7d7ad5c9, processorArchitecture=MSIL">
+      <HintPath>packages\AlphaFS.2.2.6\lib\net40\AlphaFS.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VFCopyAx, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\VFCopyAx.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpForm.cs">
@@ -108,6 +134,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,27 +177,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1.ico" />
+    <None Include="x64\VFCopy.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x86\VFCopy.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="Resources\Book_openHS.png" />
     <None Include="Resources\Book_angleHS.png" />
-    <Content Include="AlphaFS.dll" />
-    <Content Include="VFCopy.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DiffBkRestore.manifest">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\FINDFILE16.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="VFCopy">
-      <Guid>{2BABD037-1C20-4369-BFEA-464C817ABCBD}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>2</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />

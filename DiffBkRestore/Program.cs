@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DiffBkRestore
@@ -23,6 +24,18 @@ namespace DiffBkRestore
                     fp = a;
                 }
             }
+
+#if false
+            Environment.SetEnvironmentVariable(
+                "PATH",
+                Environment.GetEnvironmentVariable("PATH")
+                + ";"
+                + Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    (IntPtr.Size == 4) ? "x86" : "x64"
+                )
+            );
+#endif
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

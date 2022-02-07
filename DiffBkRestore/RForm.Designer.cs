@@ -229,6 +229,7 @@
             // 
             // tbFindPat
             // 
+            this.tbFindPat.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.tbFindPat.Name = "tbFindPat";
             this.tbFindPat.Size = new System.Drawing.Size(200, 25);
             this.tbFindPat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFindPat_KeyDown);
@@ -256,7 +257,7 @@
             // 
             this.sc.Panel2.Controls.Add(this.lvr);
             this.sc.Panel2.Controls.Add(this.label2);
-            this.sc.Size = new System.Drawing.Size(739, 121);
+            this.sc.Size = new System.Drawing.Size(739, 119);
             this.sc.SplitterDistance = 224;
             this.sc.SplitterWidth = 6;
             this.sc.TabIndex = 0;
@@ -272,7 +273,7 @@
             this.tvr.Location = new System.Drawing.Point(0, 12);
             this.tvr.Name = "tvr";
             this.tvr.SelectedImageKey = "S";
-            this.tvr.Size = new System.Drawing.Size(224, 109);
+            this.tvr.Size = new System.Drawing.Size(224, 107);
             this.tvr.TabIndex = 1;
             this.tvr.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvr_ItemDrag);
             this.tvr.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvr_AfterSelect);
@@ -324,7 +325,7 @@
             this.lvr.HideSelection = false;
             this.lvr.Location = new System.Drawing.Point(0, 12);
             this.lvr.Name = "lvr";
-            this.lvr.Size = new System.Drawing.Size(509, 109);
+            this.lvr.Size = new System.Drawing.Size(509, 107);
             this.lvr.SmallImageList = this.il;
             this.lvr.TabIndex = 1;
             this.lvr.UseCompatibleStateImageBehavior = false;
@@ -464,7 +465,7 @@
             this.hsc.Panel2.Controls.Add(this.lvres);
             this.hsc.Panel2.Controls.Add(this.tlp);
             this.hsc.Size = new System.Drawing.Size(739, 468);
-            this.hsc.SplitterDistance = 121;
+            this.hsc.SplitterDistance = 119;
             this.hsc.SplitterWidth = 6;
             this.hsc.TabIndex = 1;
             // 
@@ -483,7 +484,7 @@
             this.lvres.HideSelection = false;
             this.lvres.Location = new System.Drawing.Point(0, 12);
             this.lvres.Name = "lvres";
-            this.lvres.Size = new System.Drawing.Size(739, 329);
+            this.lvres.Size = new System.Drawing.Size(739, 331);
             this.lvres.SmallImageList = this.il;
             this.lvres.TabIndex = 4;
             this.lvres.UseCompatibleStateImageBehavior = false;

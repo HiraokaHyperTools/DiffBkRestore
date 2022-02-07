@@ -39,8 +39,9 @@ namespace DiffBkRestore
 
             if (null != e.Error)
             {
-                ListViewItem lvi = lve.Items.Add("");
+                var lvi = new ListViewItem("");
                 lvi.SubItems.Add(e.Error.Message);
+                lve.Items.Add(lvi);
             }
         }
 
@@ -90,8 +91,9 @@ namespace DiffBkRestore
         {
             Sync.Send(delegate
             {
-                ListViewItem lvi = lve.Items.Add(fpe.fp);
+                var lvi = new ListViewItem(fpe.fp);
                 lvi.SubItems.Add(fpe.err.Message);
+                lve.Items.Add(lvi);
             }, null);
         }
     }

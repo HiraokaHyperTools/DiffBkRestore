@@ -7,21 +7,20 @@
 
 ;--------------------------------
 
+Unicode true
+
+SetCompressor /SOLID lzma
+
 !define APP "DiffBkRestore"
 
-!system 'DefineAsmVer.exe "bin\x86\Release\${APP}.exe" "!define VER ""[SVER]"" " > Tmpver.nsh'
-!include "Tmpver.nsh"
+!system 'DefineAsmVer.exe "bin\Release\${APP}.exe" "!define VER ""[FVER]"" " > Appver.tmp'
+!include "Appver.tmp"
 !searchreplace APV ${VER} "." "_"
 
 !define EXT1 ".DiffBkSet"
 
-!system '"C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\Bin\mt.exe" -manifest DiffBkRestore.manifest -outputresource:bin\x86\release\DiffBkRestore.exe;#1' = 0
-
-;C:\Vs8\VC\bin\mt.exe
-;C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\Bin\mt.exe
-;C:\Program Files (x86)\Microsoft Visual Studio 8\VC\bin\mt.exe
-;C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\Tools\Bin\mt.exe
-;C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\Bin\mt.exe
+!system 'MySign "bin\Release\${APP}.exe" "x86\VFCopy.dll" "x64\VFCopy.dll"'
+!finalize 'MySign "%1"'
 
 ; The name of the installer
 Name "${APP} ${VER}"
@@ -39,10 +38,10 @@ InstallDirRegKey HKLM "Software\${APP}" "Install_Dir"
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
 
-!define DOTNET_VERSION "2.0"
+XPStyle on
 
-!include "DotNET.nsh"
 !include LogicLib.nsh
+!include x64.nsh
 
 ;--------------------------------
 
@@ -88,16 +87,16 @@ Section "" ;No components page, name is not important
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
 
-  !insertmacro CheckDotNET ${DOTNET_VERSION}
-
   ; Put file there
-  File "bin\x86\release\*.exe"
-  File "bin\x86\release\*.pdb"
-  File "bin\x86\release\*.dll"
-  ;File "bin\x86\release\*.manifest"
+  File /r /x "*.vshost.*" "bin\Release\*"
   
-  ExecWait "regsvr32.exe /s VFCopy.dll" $0
+  ExecWait 'regsvr32.exe /s "$INSTDIR\x86\VFCopy.dll"' $0
   DetailPrint "Œ‹‰Ê: $0"
+
+  ${If} ${RunningX64}
+    ExecWait 'regsvr32.exe /s "$INSTDIR\x64\VFCopy.dll"' $0
+    DetailPrint "Œ‹‰Ê: $0"
+  ${EndIf}
 
   ; Write the installation path into the registry
   WriteRegStr HKLM "SOFTWARE\${APP}" "Install_Dir" "$INSTDIR"
@@ -140,14 +139,16 @@ SectionEnd
 
 Section "Uninstall"
   ; Remove files and uninstaller
-  ExecWait "regsvr32.exe /s /u VFCopy.dll" $0
+  ExecWait 'regsvr32.exe /s /u "$INSTDIR\x86\VFCopy.dll"' $0
   DetailPrint "Œ‹‰Ê: $0"
+  
+  ${If} ${RunningX64}
+    ExecWait 'regsvr32.exe /s /u "$INSTDIR\x64\VFCopy.dll"' $0
+    DetailPrint "Œ‹‰Ê: $0"
+  ${EndIf}
 
-  Delete "AlphaFS.dll"
-  Delete "DiffBkRestore.exe"
-  Delete "DiffBkRestore.pdb"
-  Delete "Interop.VFCopy.dll"
-  Delete "VFCopy.dll"
+!system "MakeDList outDeleter.nsh $INSTDIR bin\Release"
+!include "outDeleter.nsh"
 
   ; Remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP}"
