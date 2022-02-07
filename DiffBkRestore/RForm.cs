@@ -358,6 +358,11 @@ namespace DiffBkRestore
             DLeaf curl = tn.Tag as DLeaf;
             if (curl == null) return;
 
+            if (ReferenceEquals(sender, mExposeDirsOrgPos))
+            {
+                Directory.CreateDirectory(fbdExp.SelectedPath = Path.GetDirectoryName(tn.FullPath));
+            }
+
             if (fbdExp.ShowDialog(this) == DialogResult.OK)
             {
                 ExplodeAsync(new DLeaf[] { curl }, new FEntry[0], false, fbdExp.SelectedPath);
@@ -584,6 +589,12 @@ namespace DiffBkRestore
             }
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.Description = "フォルダを選択してください:";
+
+            if (ReferenceEquals(sender, mExposeFilesOrgPos))
+            {
+                Directory.CreateDirectory(fbd.SelectedPath = tvr.SelectedNode.FullPath);
+            }
+
             if (fbd.ShowDialog(this) == DialogResult.OK)
             {
                 using (WIP wip = WIP.Show(this))
@@ -1284,6 +1295,11 @@ namespace DiffBkRestore
         private void bAlphaFS_Click(object sender, EventArgs e)
         {
             OpenUrl("http://alphafs.alphaleonis.com/");
+        }
+
+        private void mExposeFilesOrgPos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

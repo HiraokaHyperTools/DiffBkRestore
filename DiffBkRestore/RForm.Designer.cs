@@ -47,13 +47,15 @@
             this.tvr = new System.Windows.Forms.TreeView();
             this.mTree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mExposeDirs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mExposeDirsOrgPos = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.lvr = new System.Windows.Forms.ListView();
-            this.chrFn = new System.Windows.Forms.ColumnHeader();
-            this.chrCb = new System.Windows.Forms.ColumnHeader();
-            this.chrMt = new System.Windows.Forms.ColumnHeader();
+            this.chrFn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chrCb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chrMt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mExposeFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.mExposeFilesOrgPos = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tsf = new System.Windows.Forms.ToolStrip();
@@ -62,10 +64,10 @@
             this.bUseRex = new System.Windows.Forms.ToolStripButton();
             this.hsc = new System.Windows.Forms.SplitContainer();
             this.lvres = new System.Windows.Forms.ListView();
-            this.chfFn = new System.Windows.Forms.ColumnHeader();
-            this.chfCb = new System.Windows.Forms.ColumnHeader();
-            this.chfMt = new System.Windows.Forms.ColumnHeader();
-            this.chfDir = new System.Windows.Forms.ColumnHeader();
+            this.chfFn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chfCb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chfMt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chfDir = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mFindList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mExplodeFindSingleDir = new System.Windows.Forms.ToolStripMenuItem();
             this.mExplodeFindTree = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +77,7 @@
             this.fbdExp = new System.Windows.Forms.FolderBrowserDialog();
             this.ofdOpen = new System.Windows.Forms.OpenFileDialog();
             this.tstop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sc)).BeginInit();
             this.sc.Panel1.SuspendLayout();
             this.sc.Panel2.SuspendLayout();
             this.sc.SuspendLayout();
@@ -85,6 +88,7 @@
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.tsf.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hsc)).BeginInit();
             this.hsc.Panel1.SuspendLayout();
             this.hsc.Panel2.SuspendLayout();
             this.hsc.SuspendLayout();
@@ -107,7 +111,7 @@
             this.bUsing});
             this.tstop.Location = new System.Drawing.Point(3, 0);
             this.tstop.Name = "tstop";
-            this.tstop.Size = new System.Drawing.Size(602, 25);
+            this.tstop.Size = new System.Drawing.Size(579, 25);
             this.tstop.TabIndex = 0;
             // 
             // bOpenDirin
@@ -117,14 +121,14 @@
             this.bOpenDirin.Image = global::DiffBkRestore.Properties.Resources.openHS;
             this.bOpenDirin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bOpenDirin.Name = "bOpenDirin";
-            this.bOpenDirin.Size = new System.Drawing.Size(116, 22);
+            this.bOpenDirin.Size = new System.Drawing.Size(120, 22);
             this.bOpenDirin.Text = "バックアップを開く";
             this.bOpenDirin.ButtonClick += new System.EventHandler(this.bOpenDirin_ButtonClick);
             // 
             // bOpenDirwith
             // 
             this.bOpenDirwith.Name = "bOpenDirwith";
-            this.bOpenDirwith.Size = new System.Drawing.Size(174, 22);
+            this.bOpenDirwith.Size = new System.Drawing.Size(171, 22);
             this.bOpenDirwith.Text = "パスを入力して開く...";
             this.bOpenDirwith.Click += new System.EventHandler(this.bOpenDirwith_Click);
             // 
@@ -141,20 +145,20 @@
             this.tsddbVerify.Image = ((System.Drawing.Image)(resources.GetObject("tsddbVerify.Image")));
             this.tsddbVerify.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddbVerify.Name = "tsddbVerify";
-            this.tsddbVerify.Size = new System.Drawing.Size(167, 22);
+            this.tsddbVerify.Size = new System.Drawing.Size(170, 22);
             this.tsddbVerify.Text = "バックアップをすべて検証する";
             // 
             // bVerifyCache
             // 
             this.bVerifyCache.Name = "bVerifyCache";
-            this.bVerifyCache.Size = new System.Drawing.Size(346, 22);
+            this.bVerifyCache.Size = new System.Drawing.Size(347, 22);
             this.bVerifyCache.Text = "キャッシュファイルの存在を確認する";
             this.bVerifyCache.Click += new System.EventHandler(this.bVerifyCache_Click);
             // 
             // bVerifyCacheHash
             // 
             this.bVerifyCacheHash.Name = "bVerifyCacheHash";
-            this.bVerifyCacheHash.Size = new System.Drawing.Size(346, 22);
+            this.bVerifyCacheHash.Size = new System.Drawing.Size(347, 22);
             this.bVerifyCacheHash.Text = "キャッシュファイルの存在と、ハッシュ値の正当性を確認する";
             this.bVerifyCacheHash.Click += new System.EventHandler(this.bVerifyCache_Click);
             // 
@@ -169,7 +173,7 @@
             this.bExcDir.Image = global::DiffBkRestore.Properties.Resources.Book_angleHS;
             this.bExcDir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bExcDir.Name = "bExcDir";
-            this.bExcDir.Size = new System.Drawing.Size(131, 22);
+            this.bExcDir.Size = new System.Drawing.Size(133, 22);
             this.bExcDir.Text = "フォルダを一覧から省く";
             this.bExcDir.Click += new System.EventHandler(this.bIncDir_Click);
             // 
@@ -200,27 +204,27 @@
             this.bUsing.Image = ((System.Drawing.Image)(resources.GetObject("bUsing.Image")));
             this.bUsing.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bUsing.Name = "bUsing";
-            this.bUsing.Size = new System.Drawing.Size(70, 22);
+            this.bUsing.Size = new System.Drawing.Size(69, 22);
             this.bUsing.Text = "About";
             // 
             // bDeveloper
             // 
             this.bDeveloper.Name = "bDeveloper";
-            this.bDeveloper.Size = new System.Drawing.Size(420, 22);
+            this.bDeveloper.Size = new System.Drawing.Size(382, 22);
             this.bDeveloper.Text = "DiffBkRestore developed by HIRAOKA HYPERS TOOLS, Inc.";
             this.bDeveloper.Click += new System.EventHandler(this.bDeveloper_Click);
             // 
             // bAlphaFS
             // 
             this.bAlphaFS.Name = "bAlphaFS";
-            this.bAlphaFS.Size = new System.Drawing.Size(420, 22);
+            this.bAlphaFS.Size = new System.Drawing.Size(382, 22);
             this.bAlphaFS.Text = "- Using AlphaFS";
             this.bAlphaFS.Click += new System.EventHandler(this.bAlphaFS_Click);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(164, 22);
             this.toolStripLabel1.Text = "ファイル・フォルダを検索(Alt+&F)：";
             // 
             // tbFindPat
@@ -252,7 +256,7 @@
             // 
             this.sc.Panel2.Controls.Add(this.lvr);
             this.sc.Panel2.Controls.Add(this.label2);
-            this.sc.Size = new System.Drawing.Size(739, 133);
+            this.sc.Size = new System.Drawing.Size(739, 127);
             this.sc.SplitterDistance = 224;
             this.sc.SplitterWidth = 6;
             this.sc.TabIndex = 0;
@@ -268,25 +272,33 @@
             this.tvr.Location = new System.Drawing.Point(0, 12);
             this.tvr.Name = "tvr";
             this.tvr.SelectedImageKey = "S";
-            this.tvr.Size = new System.Drawing.Size(224, 121);
+            this.tvr.Size = new System.Drawing.Size(224, 115);
             this.tvr.TabIndex = 1;
+            this.tvr.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvr_ItemDrag);
             this.tvr.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvr_AfterSelect);
             this.tvr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvr_KeyDown);
-            this.tvr.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvr_ItemDrag);
             // 
             // mTree
             // 
             this.mTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mExposeDirs});
+            this.mExposeDirs,
+            this.mExposeDirsOrgPos});
             this.mTree.Name = "mTree";
-            this.mTree.Size = new System.Drawing.Size(130, 26);
+            this.mTree.Size = new System.Drawing.Size(184, 48);
             // 
             // mExposeDirs
             // 
             this.mExposeDirs.Name = "mExposeDirs";
-            this.mExposeDirs.Size = new System.Drawing.Size(129, 22);
+            this.mExposeDirs.Size = new System.Drawing.Size(183, 22);
             this.mExposeDirs.Text = "復元する...";
             this.mExposeDirs.Click += new System.EventHandler(this.mExposeDirs_Click);
+            // 
+            // mExposeDirsOrgPos
+            // 
+            this.mExposeDirsOrgPos.Name = "mExposeDirsOrgPos";
+            this.mExposeDirsOrgPos.Size = new System.Drawing.Size(183, 22);
+            this.mExposeDirsOrgPos.Text = "復元する (元の場所)...";
+            this.mExposeDirsOrgPos.Click += new System.EventHandler(this.mExposeDirs_Click);
             // 
             // label1
             // 
@@ -312,15 +324,15 @@
             this.lvr.HideSelection = false;
             this.lvr.Location = new System.Drawing.Point(0, 12);
             this.lvr.Name = "lvr";
-            this.lvr.Size = new System.Drawing.Size(509, 121);
+            this.lvr.Size = new System.Drawing.Size(509, 115);
             this.lvr.SmallImageList = this.il;
             this.lvr.TabIndex = 1;
             this.lvr.UseCompatibleStateImageBehavior = false;
             this.lvr.View = System.Windows.Forms.View.Details;
-            this.lvr.ItemActivate += new System.EventHandler(this.lvr_ItemActivate);
             this.lvr.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvfs_ColumnClick);
-            this.lvr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvr_KeyDown);
+            this.lvr.ItemActivate += new System.EventHandler(this.lvr_ItemActivate);
             this.lvr.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvr_ItemDrag);
+            this.lvr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvr_KeyDown);
             // 
             // chrFn
             // 
@@ -341,16 +353,24 @@
             // mList
             // 
             this.mList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mExposeFiles});
+            this.mExposeFiles,
+            this.mExposeFilesOrgPos});
             this.mList.Name = "mList";
-            this.mList.Size = new System.Drawing.Size(130, 26);
+            this.mList.Size = new System.Drawing.Size(184, 48);
             // 
             // mExposeFiles
             // 
             this.mExposeFiles.Name = "mExposeFiles";
-            this.mExposeFiles.Size = new System.Drawing.Size(129, 22);
+            this.mExposeFiles.Size = new System.Drawing.Size(183, 22);
             this.mExposeFiles.Text = "復元する...";
             this.mExposeFiles.Click += new System.EventHandler(this.mExposeFiles_Click);
+            // 
+            // mExposeFilesOrgPos
+            // 
+            this.mExposeFilesOrgPos.Name = "mExposeFilesOrgPos";
+            this.mExposeFilesOrgPos.Size = new System.Drawing.Size(183, 22);
+            this.mExposeFilesOrgPos.Text = "復元する (元の場所)...";
+            this.mExposeFilesOrgPos.Click += new System.EventHandler(this.mExposeFiles_Click);
             // 
             // label2
             // 
@@ -397,7 +417,7 @@
             this.bUseRex});
             this.tsf.Location = new System.Drawing.Point(3, 0);
             this.tsf.Name = "tsf";
-            this.tsf.Size = new System.Drawing.Size(699, 25);
+            this.tsf.Size = new System.Drawing.Size(692, 25);
             this.tsf.TabIndex = 0;
             // 
             // bFindPat
@@ -405,7 +425,7 @@
             this.bFindPat.Image = global::DiffBkRestore.Properties.Resources.FindHS;
             this.bFindPat.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bFindPat.Name = "bFindPat";
-            this.bFindPat.Size = new System.Drawing.Size(79, 22);
+            this.bFindPat.Size = new System.Drawing.Size(78, 22);
             this.bFindPat.Text = "検索します";
             this.bFindPat.Click += new System.EventHandler(this.bFindPat_Click);
             // 
@@ -444,7 +464,7 @@
             this.hsc.Panel2.Controls.Add(this.lvres);
             this.hsc.Panel2.Controls.Add(this.tlp);
             this.hsc.Size = new System.Drawing.Size(739, 468);
-            this.hsc.SplitterDistance = 133;
+            this.hsc.SplitterDistance = 127;
             this.hsc.SplitterWidth = 6;
             this.hsc.TabIndex = 1;
             // 
@@ -463,15 +483,15 @@
             this.lvres.HideSelection = false;
             this.lvres.Location = new System.Drawing.Point(0, 12);
             this.lvres.Name = "lvres";
-            this.lvres.Size = new System.Drawing.Size(739, 317);
+            this.lvres.Size = new System.Drawing.Size(739, 323);
             this.lvres.SmallImageList = this.il;
             this.lvres.TabIndex = 4;
             this.lvres.UseCompatibleStateImageBehavior = false;
             this.lvres.View = System.Windows.Forms.View.Details;
-            this.lvres.ItemActivate += new System.EventHandler(this.lvres_ItemActivate);
             this.lvres.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvres_ColumnClick);
-            this.lvres.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvres_KeyDown);
+            this.lvres.ItemActivate += new System.EventHandler(this.lvres_ItemActivate);
             this.lvres.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvres_ItemDrag);
+            this.lvres.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvres_KeyDown);
             // 
             // chfFn
             // 
@@ -500,12 +520,12 @@
             this.mExplodeFindSingleDir,
             this.mExplodeFindTree});
             this.mFindList.Name = "mFindList";
-            this.mFindList.Size = new System.Drawing.Size(232, 48);
+            this.mFindList.Size = new System.Drawing.Size(227, 48);
             // 
             // mExplodeFindSingleDir
             // 
             this.mExplodeFindSingleDir.Name = "mExplodeFindSingleDir";
-            this.mExplodeFindSingleDir.Size = new System.Drawing.Size(231, 22);
+            this.mExplodeFindSingleDir.Size = new System.Drawing.Size(226, 22);
             this.mExplodeFindSingleDir.Text = "復元する(一つのフォルダに)...";
             this.mExplodeFindSingleDir.Click += new System.EventHandler(this.mExplodeFindSingleDir_Click);
             // 
@@ -513,7 +533,7 @@
             // 
             this.mExplodeFindTree.Enabled = false;
             this.mExplodeFindTree.Name = "mExplodeFindTree";
-            this.mExplodeFindTree.Size = new System.Drawing.Size(231, 22);
+            this.mExplodeFindTree.Size = new System.Drawing.Size(226, 22);
             this.mExplodeFindTree.Text = "復元する(フォルダ階層を復元)...";
             this.mExplodeFindTree.Click += new System.EventHandler(this.mExplodeFindSingleDir_Click);
             // 
@@ -575,17 +595,18 @@
             this.Name = "RForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DiffBk 復元プログラム Ver(*)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RForm_FormClosed);
             this.Load += new System.EventHandler(this.RForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.RForm_DragDrop);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RForm_FormClosed);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.RForm_DragEnter);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RForm_FormClosing);
             this.tstop.ResumeLayout(false);
             this.tstop.PerformLayout();
             this.sc.Panel1.ResumeLayout(false);
             this.sc.Panel1.PerformLayout();
             this.sc.Panel2.ResumeLayout(false);
             this.sc.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sc)).EndInit();
             this.sc.ResumeLayout(false);
             this.mTree.ResumeLayout(false);
             this.mList.ResumeLayout(false);
@@ -601,6 +622,7 @@
             this.hsc.Panel1.ResumeLayout(false);
             this.hsc.Panel2.ResumeLayout(false);
             this.hsc.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hsc)).EndInit();
             this.hsc.ResumeLayout(false);
             this.mFindList.ResumeLayout(false);
             this.tlp.ResumeLayout(false);
@@ -660,7 +682,8 @@
         private System.Windows.Forms.ToolStripDropDownButton bUsing;
         private System.Windows.Forms.ToolStripMenuItem bDeveloper;
         private System.Windows.Forms.ToolStripMenuItem bAlphaFS;
-
+        private System.Windows.Forms.ToolStripMenuItem mExposeDirsOrgPos;
+        private System.Windows.Forms.ToolStripMenuItem mExposeFilesOrgPos;
     }
 }
 
