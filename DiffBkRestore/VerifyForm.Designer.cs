@@ -28,16 +28,16 @@
             this.pbWIP = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lvF = new System.Windows.Forms.ListView();
-            this.chName = new System.Windows.Forms.ColumnHeader();
-            this.lDone = new System.Windows.Forms.Label();
-            this.llRep = new System.Windows.Forms.LinkLabel();
-            this.lPos = new System.Windows.Forms.Label();
-            this.chA = new System.Windows.Forms.ColumnHeader();
-            this.chPlace = new System.Windows.Forms.ColumnHeader();
-            this.chHashfp = new System.Windows.Forms.ColumnHeader();
+            this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chA = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chPlace = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chHashfp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmsF = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mSel = new System.Windows.Forms.ToolStripMenuItem();
             this.mHash = new System.Windows.Forms.ToolStripMenuItem();
+            this.lDone = new System.Windows.Forms.Label();
+            this.llRep = new System.Windows.Forms.LinkLabel();
+            this.lPos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbWIP)).BeginInit();
             this.cmsF.SuspendLayout();
             this.SuspendLayout();
@@ -72,9 +72,9 @@
             // 
             // lvF
             // 
-            this.lvF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvF.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chName,
             this.chA,
@@ -83,6 +83,7 @@
             this.lvF.ContextMenuStrip = this.cmsF;
             this.lvF.FullRowSelect = true;
             this.lvF.GridLines = true;
+            this.lvF.HideSelection = false;
             this.lvF.Location = new System.Drawing.Point(12, 77);
             this.lvF.MultiSelect = false;
             this.lvF.Name = "lvF";
@@ -96,6 +97,42 @@
             // 
             this.chName.Text = "ファイル名称";
             this.chName.Width = 150;
+            // 
+            // chA
+            // 
+            this.chA.Text = "どんな問題?";
+            this.chA.Width = 80;
+            // 
+            // chPlace
+            // 
+            this.chPlace.Text = "場所";
+            this.chPlace.Width = 200;
+            // 
+            // chHashfp
+            // 
+            this.chHashfp.Text = "ハッシュファイル";
+            // 
+            // cmsF
+            // 
+            this.cmsF.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mSel,
+            this.mHash});
+            this.cmsF.Name = "cmsF";
+            this.cmsF.Size = new System.Drawing.Size(196, 48);
+            // 
+            // mSel
+            // 
+            this.mSel.Name = "mSel";
+            this.mSel.Size = new System.Drawing.Size(195, 22);
+            this.mSel.Text = "選択する";
+            this.mSel.Click += new System.EventHandler(this.mSel_Click);
+            // 
+            // mHash
+            // 
+            this.mHash.Name = "mHash";
+            this.mHash.Size = new System.Drawing.Size(195, 22);
+            this.mHash.Text = "ハッシュファイルを参照する";
+            this.mHash.Click += new System.EventHandler(this.mSel_Click);
             // 
             // lDone
             // 
@@ -128,46 +165,9 @@
             this.lPos.TabIndex = 6;
             this.lPos.Text = "...";
             // 
-            // chA
-            // 
-            this.chA.Text = "どんな問題?";
-            this.chA.Width = 80;
-            // 
-            // chPlace
-            // 
-            this.chPlace.Text = "場所";
-            this.chPlace.Width = 200;
-            // 
-            // chHashfp
-            // 
-            this.chHashfp.Text = "ハッシュファイル";
-            // 
-            // cmsF
-            // 
-            this.cmsF.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mSel,
-            this.mHash});
-            this.cmsF.Name = "cmsF";
-            this.cmsF.Size = new System.Drawing.Size(192, 48);
-            // 
-            // mSel
-            // 
-            this.mSel.Name = "mSel";
-            this.mSel.Size = new System.Drawing.Size(191, 22);
-            this.mSel.Text = "選択する";
-            this.mSel.Click += new System.EventHandler(this.mSel_Click);
-            // 
-            // mHash
-            // 
-            this.mHash.Name = "mHash";
-            this.mHash.Size = new System.Drawing.Size(191, 22);
-            this.mHash.Text = "ハッシュファイルを参照する";
-            this.mHash.Click += new System.EventHandler(this.mSel_Click);
-            // 
             // VerifyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(552, 331);
             this.Controls.Add(this.lPos);
             this.Controls.Add(this.llRep);

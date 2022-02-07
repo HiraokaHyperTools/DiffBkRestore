@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -68,38 +69,47 @@ namespace DiffBkRestore
         void ReadList(String fpList)
         {
             String curdir = null;
-            foreach (String row in File.ReadAllLines(fpList, Encoding.UTF8))
+            using (var reader = new StreamReader(fpList, Encoding.UTF8, true, 1048576))
             {
-                try
+                while (true)
                 {
-                    String[] cols = row.Split(' ');
-                    if (cols[0] == "+" && cols.Length >= 5)
+                    var row = reader.ReadLine();
+                    if (row == null)
                     {
-                        String fnCache = HttpUtility.UrlDecode(cols[2], Encoding.UTF8);
-                        String fpCache = (curdir != null) ? Path.Combine(curdir, fnCache) : fnCache;
-
-                        DLeaf curl = Alloc(fs.Path.GetDirectoryName(fpCache));
-
-                        String fn = fs.Path.GetFileName(fnCache);
-
-                        curl.dictFile[fn] = new FEntry(
-                            cols[1],
-                            Convert.ToInt64(cols[3]),
-                            Convert.ToInt64(cols[4]),
-                            (cols.Length > 5) ? Convert.ToInt32(cols[5]) : 0,
-                            fn
-                            );
+                        break;
                     }
-                    if (cols[0] == "@" && cols.Length >= 2)
+
+                    try
                     {
-                        curdir = HttpUtility.UrlDecode(cols[1], Encoding.UTF8);
-                        DLeaf curl = Alloc(curdir);
-                        curl.fe.atts = (cols.Length >= 3) ? Convert.ToInt32(cols[2]) : 0;
-                    }
-                }
-                catch (FormatException)
-                {
+                        String[] cols = row.Split(' ');
+                        if (cols[0] == "+" && cols.Length >= 5)
+                        {
+                            String fnCache = HttpUtility.UrlDecode(cols[2], Encoding.UTF8);
+                            String fpCache = (curdir != null) ? Path.Combine(curdir, fnCache) : fnCache;
 
+                            DLeaf curl = Alloc(fs.Path.GetDirectoryName(fpCache));
+
+                            String fn = fs.Path.GetFileName(fnCache);
+
+                            curl.dictFile[fn] = new FEntry(
+                                cols[1],
+                                Convert.ToInt64(cols[3]),
+                                Convert.ToInt64(cols[4]),
+                                (cols.Length > 5) ? Convert.ToInt32(cols[5]) : 0,
+                                fn
+                                );
+                        }
+                        if (cols[0] == "@" && cols.Length >= 2)
+                        {
+                            curdir = HttpUtility.UrlDecode(cols[1], Encoding.UTF8);
+                            DLeaf curl = Alloc(curdir);
+                            curl.fe.atts = (cols.Length >= 3) ? Convert.ToInt32(cols[2]) : 0;
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        // ignore
+                    }
                 }
             }
 
@@ -369,12 +379,28 @@ namespace DiffBkRestore
             }
         }
 
+        class Stat
+        {
+            internal int numFiles = 0;
+            internal int numDirs = 0;
+            internal long size = 0;
+        }
+
         private void ExplodeAsync(IList<DLeaf> dirsIn, IList<FEntry> filesIn, bool isSingleDir, String dirTo)
         {
             List<DLeaf> dirs = new List<DLeaf>(dirsIn); while (dirs.Remove(null)) { }
             List<FEntry> files = new List<FEntry>(filesIn); while (files.Remove(null)) { }
 
+            var stat = new Stat();
+            WalkStatRecursively(dirs, stat);
+            foreach (var file in files)
+            {
+                stat.size += file.cb;
+                stat.numFiles += 1;
+            }
+
             PolicyForm polform = new PolicyForm();
+            polform.statText.Text = $"ファイル数: {stat.numFiles:#,##0}\nフォルダ数: {stat.numDirs:#,##0}\n容量: {stat.size:#,##0} バイト";
             if (polform.ShowDialog() != DialogResult.OK) return;
 
             ExpForm form = new ExpForm();
@@ -425,6 +451,25 @@ namespace DiffBkRestore
             form.Show(this);
             form.bwExp.RunWorkerAsync();
             //MessageBox.Show(this, "完了しました。", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void WalkStatRecursively(IEnumerable<DLeaf> dirs, Stat stat)
+        {
+            var leaves = new Stack<DLeaf>(dirs);
+            while (leaves.Any())
+            {
+                stat.numDirs += 1;
+                var leaf = leaves.Pop();
+                foreach (var file in leaf.dictFile.Values)
+                {
+                    stat.size += file.cb;
+                    stat.numFiles += 1;
+                }
+                foreach (var sub in leaf.dictDir.Values)
+                {
+                    leaves.Push(sub);
+                }
+            }
         }
 
         class ExplodeState
@@ -1295,11 +1340,6 @@ namespace DiffBkRestore
         private void bAlphaFS_Click(object sender, EventArgs e)
         {
             OpenUrl("http://alphafs.alphaleonis.com/");
-        }
-
-        private void mExposeFilesOrgPos_Click(object sender, EventArgs e)
-        {
-
         }
     }
 

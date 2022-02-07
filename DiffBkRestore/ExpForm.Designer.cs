@@ -28,8 +28,8 @@
             this.bwExp = new System.ComponentModel.BackgroundWorker();
             this.label1 = new System.Windows.Forms.Label();
             this.lve = new System.Windows.Forms.ListView();
-            this.chfp = new System.Windows.Forms.ColumnHeader();
-            this.chMes = new System.Windows.Forms.ColumnHeader();
+            this.chfp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chMes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,24 +44,24 @@
             // 
             // pbTotal
             // 
-            this.pbTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbTotal.Location = new System.Drawing.Point(12, 46);
+            this.pbTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbTotal.Location = new System.Drawing.Point(12, 53);
             this.pbTotal.Name = "pbTotal";
-            this.pbTotal.Size = new System.Drawing.Size(586, 23);
+            this.pbTotal.Size = new System.Drawing.Size(620, 23);
             this.pbTotal.TabIndex = 1;
             // 
             // bwExp
             // 
             this.bwExp.WorkerReportsProgress = true;
             this.bwExp.WorkerSupportsCancellation = true;
-            this.bwExp.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExp_RunWorkerCompleted);
             this.bwExp.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExp_ProgressChanged);
+            this.bwExp.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExp_RunWorkerCompleted);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 82);
+            this.label1.Location = new System.Drawing.Point(12, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 2;
@@ -69,18 +69,19 @@
             // 
             // lve
             // 
-            this.lve.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lve.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lve.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chfp,
             this.chMes});
             this.lve.FullRowSelect = true;
             this.lve.GridLines = true;
-            this.lve.Location = new System.Drawing.Point(12, 97);
+            this.lve.HideSelection = false;
+            this.lve.Location = new System.Drawing.Point(12, 110);
             this.lve.MultiSelect = false;
             this.lve.Name = "lve";
-            this.lve.Size = new System.Drawing.Size(586, 119);
+            this.lve.Size = new System.Drawing.Size(620, 161);
             this.lve.TabIndex = 3;
             this.lve.UseCompatibleStateImageBehavior = false;
             this.lve.View = System.Windows.Forms.View.Details;
@@ -97,7 +98,8 @@
             // 
             // bStop
             // 
-            this.bStop.Location = new System.Drawing.Point(523, 12);
+            this.bStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bStop.Location = new System.Drawing.Point(557, 24);
             this.bStop.Name = "bStop";
             this.bStop.Size = new System.Drawing.Size(75, 23);
             this.bStop.TabIndex = 4;
@@ -107,20 +109,19 @@
             // 
             // ExpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 226);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(644, 281);
             this.Controls.Add(this.bStop);
             this.Controls.Add(this.lve);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbTotal);
             this.Controls.Add(this.lPos);
-            this.MinimumSize = new System.Drawing.Size(215, 119);
+            this.MinimumSize = new System.Drawing.Size(480, 265);
             this.Name = "ExpForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "復元中...";
-            this.Load += new System.EventHandler(this.ExpForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExpForm_FormClosing);
+            this.Load += new System.EventHandler(this.ExpForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

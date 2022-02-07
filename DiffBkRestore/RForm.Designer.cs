@@ -256,7 +256,7 @@
             // 
             this.sc.Panel2.Controls.Add(this.lvr);
             this.sc.Panel2.Controls.Add(this.label2);
-            this.sc.Size = new System.Drawing.Size(739, 127);
+            this.sc.Size = new System.Drawing.Size(739, 121);
             this.sc.SplitterDistance = 224;
             this.sc.SplitterWidth = 6;
             this.sc.TabIndex = 0;
@@ -272,7 +272,7 @@
             this.tvr.Location = new System.Drawing.Point(0, 12);
             this.tvr.Name = "tvr";
             this.tvr.SelectedImageKey = "S";
-            this.tvr.Size = new System.Drawing.Size(224, 115);
+            this.tvr.Size = new System.Drawing.Size(224, 109);
             this.tvr.TabIndex = 1;
             this.tvr.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvr_ItemDrag);
             this.tvr.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvr_AfterSelect);
@@ -324,7 +324,7 @@
             this.lvr.HideSelection = false;
             this.lvr.Location = new System.Drawing.Point(0, 12);
             this.lvr.Name = "lvr";
-            this.lvr.Size = new System.Drawing.Size(509, 115);
+            this.lvr.Size = new System.Drawing.Size(509, 109);
             this.lvr.SmallImageList = this.il;
             this.lvr.TabIndex = 1;
             this.lvr.UseCompatibleStateImageBehavior = false;
@@ -464,7 +464,7 @@
             this.hsc.Panel2.Controls.Add(this.lvres);
             this.hsc.Panel2.Controls.Add(this.tlp);
             this.hsc.Size = new System.Drawing.Size(739, 468);
-            this.hsc.SplitterDistance = 127;
+            this.hsc.SplitterDistance = 121;
             this.hsc.SplitterWidth = 6;
             this.hsc.TabIndex = 1;
             // 
@@ -483,7 +483,7 @@
             this.lvres.HideSelection = false;
             this.lvres.Location = new System.Drawing.Point(0, 12);
             this.lvres.Name = "lvres";
-            this.lvres.Size = new System.Drawing.Size(739, 323);
+            this.lvres.Size = new System.Drawing.Size(739, 329);
             this.lvres.SmallImageList = this.il;
             this.lvres.TabIndex = 4;
             this.lvres.UseCompatibleStateImageBehavior = false;
@@ -588,8 +588,7 @@
             // RForm
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(739, 518);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "RForm";
